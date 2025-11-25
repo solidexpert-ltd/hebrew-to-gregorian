@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBtoGR", "HBtoGR\HBtoGR.csproj", "{BC0DE053-C5A0-4938-834D-D8FAABBD9B49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidExpert.HebrewToGregorian", "src\SolidExpert.HebrewToGregorian\SolidExpert.HebrewToGregorian.csproj", "{BC0DE053-C5A0-4938-834D-D8FAABBD9B49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{E28A76EB-7A1B-48AC-9680-EA9551DD33D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidExpert.HebrewToGregorian.Tests", "tests\SolidExpert.HebrewToGregorian.Tests\SolidExpert.HebrewToGregorian.Tests.csproj", "{E28A76EB-7A1B-48AC-9680-EA9551DD33D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

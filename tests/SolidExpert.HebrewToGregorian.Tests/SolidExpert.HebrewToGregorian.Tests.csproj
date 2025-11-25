@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HBtoGR\HBtoGR.csproj" />
+        <ProjectReference Include="..\..\src\SolidExpert.HebrewToGregorian\SolidExpert.HebrewToGregorian.csproj" />
     </ItemGroup>
 
 </Project>

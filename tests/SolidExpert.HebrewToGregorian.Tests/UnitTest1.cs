@@ -62,4 +62,34 @@ public class Tests
             Assert.True(dates.Contains(dateTime));
         }
     }
+
+    [Test]
+    public void ShouldConvertHebrewToGregorianAndBack()
+    {
+        var converter = new HebrewGregorianConverter();
+
+        var hebrewDate = new HebrewDate(5783, 7, 15); // 15 Tishrei 5783 -> Oct 10 2022
+        var gregorian = converter.ToGregorian(hebrewDate.Year, hebrewDate.Month, hebrewDate.Day);
+
+        Assert.That(gregorian, Is.EqualTo(new DateTime(2022, 10, 10)));
+
+        var hebrewBack = converter.ToHebrew(gregorian);
+        Assert.That(hebrewBack, Is.EqualTo(hebrewDate));
+    }
+
+    [Test]
+    public void ShouldEnumerateRangeWithHebrewDates()
+    {
+        var converter = new HebrewGregorianConverter();
+        var results = converter.Range(new DateTime(2023, 9, 15), new DateTime(2023, 9, 17)).ToList();
+
+        Assert.That(results.Count, Is.EqualTo(3));
+        Assert.Multiple(() =>
+        {
+            Assert.That(results[0].gregorian, Is.EqualTo(new DateTime(2023, 9, 15)));
+            Assert.That(results[0].hebrew, Is.EqualTo(new HebrewDate(5784, 1, 1)));
+            Assert.That(results[2].gregorian, Is.EqualTo(new DateTime(2023, 9, 17)));
+            Assert.That(results[2].hebrew, Is.EqualTo(new HebrewDate(5784, 1, 3)));
+        });
+    }
 }
