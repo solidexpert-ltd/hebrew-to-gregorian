@@ -92,4 +92,66 @@ public class Tests
             Assert.That(results[2].hebrew, Is.EqualTo(new HebrewDate(5784, 1, 3)));
         });
     }
+
+    [Test]
+    public void ShouldAddDaysAcrossHebrewDates()
+    {
+        var converter = new HebrewGregorianConverter();
+        var sukkot = new HebrewDate(5784, 1, 15); // 15 Tishrei 5784
+
+        var afterWeek = converter.AddDays(sukkot, 7);
+        var beforeFast = converter.AddDays(sukkot, -1);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(afterWeek, Is.EqualTo(new HebrewDate(5784, 1, 22)));
+            Assert.That(beforeFast, Is.EqualTo(new HebrewDate(5784, 1, 14)));
+        });
+    }
+
+    [Test]
+    public void ShouldMeasureDaysBetweenHebrewDates()
+    {
+        var converter = new HebrewGregorianConverter();
+        var roshHashana = new HebrewDate(5784, 1, 1);
+        var yomKippur = new HebrewDate(5784, 1, 10);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(converter.DaysBetween(roshHashana, yomKippur), Is.EqualTo(9));
+            Assert.That(converter.DaysBetween(yomKippur, roshHashana), Is.EqualTo(-9));
+        });
+    }
+
+    [Test]
+    public void HebrewDateShouldExposeMonthMetadata()
+    {
+        var date = new HebrewDate(5784, 6, 10); // Adar I in a leap year
+        var info = date.GetMonthInfo();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(date.IsLeapYear, Is.True);
+            Assert.That(date.GetMonthName(), Is.EqualTo("Adar I"));
+            Assert.That(info.Name, Is.EqualTo("Adar I"));
+            Assert.That(info.Days, Is.EqualTo(date.DaysInMonth));
+            Assert.That(info.Start, Is.EqualTo(date.StartOfMonth));
+            Assert.That(info.End.Day, Is.EqualTo(date.EndOfMonth.Day));
+        });
+    }
+
+    [Test]
+    public void ShouldProvideMonthInfoForEntireYear()
+    {
+        var converter = new HebrewGregorianConverter();
+        var months = converter.GetYearMonths(5784);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(months.Count, Is.EqualTo(13));
+            Assert.That(months[0].Name, Is.EqualTo("Tishrei"));
+            Assert.That(months[5].Name, Is.EqualTo("Adar I"));
+            Assert.That(months[6].Name, Is.EqualTo("Adar II"));
+        });
+    }
 }

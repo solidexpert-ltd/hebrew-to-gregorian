@@ -22,3 +22,17 @@ Console.WriteLine($"HB {hebrewDate} converts to GR {gregorian:yyyy-MM-dd}");
 var backToHebrew = converter.ToHebrew(new DateTime(2024, 10, 3));
 Console.WriteLine($"GR 2024-10-03 converts to HB {backToHebrew}");
 
+var shifted = converter.AddDays(backToHebrew, 5);
+Console.WriteLine($"HB {backToHebrew} plus 5 days => HB {shifted}");
+
+var span = converter.DaysBetween(new HebrewDate(5784, 1, 1), new HebrewDate(5784, 1, 10));
+Console.WriteLine($"Days between Rosh Hashanah 5784 and Yom Kippur 5784: {span}");
+
+Console.WriteLine();
+Console.WriteLine("Month overview for Hebrew year 5784:");
+foreach (var month in converter.GetYearMonths(5784))
+{
+    var monthInfo = month;
+    Console.WriteLine($"{monthInfo.Name}: {monthInfo.Days} days (start {converter.ToGregorian(monthInfo.Start):yyyy-MM-dd})");
+}
+
