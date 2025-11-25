@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Semantic version to publish (e.g. 1.0.0)"
+        description: "Semantic version to publish (overrides run number)"
         required: true
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
   publish:
@@ -34,7 +34,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             VERSION="${{ github.event.inputs.version }}"
           else
-            VERSION="${GITHUB_REF_NAME#v}"
+            VERSION="1.0.${GITHUB_RUN_NUMBER}"
           fi
           if [ -z "$VERSION" ]; then
             echo "Package version is required." >&2
