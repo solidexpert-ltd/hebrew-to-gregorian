@@ -6,6 +6,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>SolidExpert.HebrewToGregorian</RootNamespace>
+        <Description>Convert Hebrew calendar dates and holiday schedules to their Gregorian equivalents with lightweight helpers for date math and metadata.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="" Link="README.md" />
+    </ItemGroup>
 
 </Project>
